@@ -18,9 +18,12 @@ jobs:
       - run: ls -lha && go mod vendor && go build -v ./... && GOOS=windows GOARCH=amd64 go build -v ./...
         name: "Build apps"
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Automatic Releases
+        uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          title: "Development Build"
           files: |
             *.exe
             mqtt2mysql
